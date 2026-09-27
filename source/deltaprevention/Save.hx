@@ -4,7 +4,7 @@ import flixel.util.FlxSave;
 
 class Save extends FlxSave
 {
-    public static var instance:Save;
+	public static var instance:Save;
 
 	override public function new()
 	{
@@ -12,12 +12,13 @@ class Save extends FlxSave
 
 		bind('DeltaPrevention', '.Maverick');
 
-        gameData ??= {};
+		gameData ??= {};
 		#if FORCE_INTRO
-        seenIntro = false;
+		seenIntro = false;
 		#else
-        seenIntro ??= false;
+		seenIntro ??= false;
 		#end
+		language ??= 'eng-US';
 	}
 
 	public var gameData(get, set):Dynamic;
@@ -31,4 +32,10 @@ class Save extends FlxSave
 	function get_seenIntro():Null<Bool> return gameData.seenIntro;
 
 	function set_seenIntro(seenIntro:Null<Bool>):Null<Bool> return gameData.seenIntro = seenIntro;
+
+	public var language(get, set):String;
+
+	function get_language():String return gameData.language;
+
+	function set_language(language:String):String return gameData.language = language;
 }

@@ -15,6 +15,7 @@ class Main extends FlxGame
 	override function create(_:Event)
 	{
 		Save.instance = new Save();
+		Language.instance = new Language();
 
 		super.create(_);
 

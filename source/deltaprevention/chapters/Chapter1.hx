@@ -1,17 +1,28 @@
 package deltaprevention.chapters;
 
-import flixel.text.FlxText;
-import flixel.FlxState;
+import lime.utils.Assets;
 
-class Chapter1 extends FlxState
+using StringTools;
+
+class Chapter1 extends Chapter
 {
-	var dialogueText:FlxText;
-
 	override function create()
 	{
 		super.create();
 
-		add(dialogueText = new FlxText(0, 0, 0, 'LEXIA!!', 16));
-		dialogueText.screenCenter();
+		lines = [
+			for (line in Assets.getText(Language.instance.getLangFile('dialogue/chapter1.txt')).split('\n')) line.trim()
+		];
+
+		speak(0, 'gele');
+	}
+
+	override function onDialogueDone()
+	{
+		super.onDialogueDone();
+
+		trace(piece);
+
+		switch (piece) {}
 	}
 }
