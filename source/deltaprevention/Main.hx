@@ -19,57 +19,40 @@ class Main extends FlxGame
 		Save.instance = new Save();
 		Language.instance = new Language();
 
-		var standard_tilesetData = Json.parse(Assets.getText('chapters/realm_standard/tileset.json'));
-		var tags:Array<Dynamic> = standard_tilesetData?.meta?.frameTags ?? [];
-
-		var sm:Array<Int> = [];
-		var sri:Array<Int> = [];
-		var src:Array<Array<Int>> = [];
-
-		var debugLen = 0;
-
-		for (i => tag in tags)
-		{
-			var name:String = tag.name;
-
-			var from:Int = tag.from;
-			var to:Int = tag.to;
-			
-			if (name == 'debug')
-			{
-				debugLen = to;
-				continue;
-			}
-
-			var diff = (to - from) + 1;
-
-			sm.push(i - 1);
-			sri.push(from);
-
-			var choices = [for (i in 0...diff) from + i];
-
-			switch (name)
-			{
-				case 'water': src.push(choices);
-				default:
-					var replacechoices = [
-						for (choice in choices) if (Save.instance.mapRandom.bool((1 / diff) * 100)) choice
-					];
-					src.push((replacechoices.length == 0) ? [from] : replacechoices);
-			}
-		}
-
-		RealmMap.standard_mappings = sm;
-		RealmMap.standard_random_indices = sri;
-		RealmMap.standard_random_choices = src;
-
-		trace(RealmMap.standard_mappings);
-		trace(RealmMap.standard_random_indices);
-		trace(RealmMap.standard_random_choices);
+		addRealmMappings();
 
 		super.create(_);
 
 		if (Save.instance.seenIntro) FlxG.switchState(() -> new Chapter1());
 		else FlxG.switchState(() -> new IntroState());
+	}
+
+	function addRealmMappings()
+	{
+		function getRandomTiles(length = 4, offset = 0) return [
+			for (i in 0...length) if (Save.instance.mapRandom.bool((1 / length) * 100)) offset + i
+		];
+
+		function indicesAndChoices(indicesList:Array<Int>, choicesList:Array<Array<Int>>, indice = 0, length = 4)
+		{
+			if (indicesList == null || choicesList == null) return;
+			var choices = getRandomTiles(length, indice);
+
+			if (choices.length != 0)
+			{
+				indicesList.push(indice);
+				choicesList.push(choices);
+			}
+		}
+
+		var s_m:Array<Int> = [];
+		var s_ri:Array<Int> = [64];
+		var s_rc:Array<Array<Int>> = [[64, 65, 66, 67]];
+
+		for (i in 0...16) indicesAndChoices(s_ri, s_rc, i * 4, 4);
+
+		RealmMap.standard_mappings = s_m;
+		RealmMap.standard_random_indices = s_ri;
+		RealmMap.standard_random_choices = s_rc;
 	}
 }

@@ -17,9 +17,9 @@ class Chapter1 extends Chapter
 
 		lines = Language.instance.getTextLangFile('dialogue/txt_chapter1.txt');
 
-		map = new RealmMap('standard', '0-0');
+		map = new RealmMap('standard', 'test');
 		add(map.layers);
-		for (i in 0...2) map.loadLayer('layer_${i + 1}', RealmMap.standard_mappings, RealmMap.standard_random_indices, RealmMap.standard_random_choices);
+		map.loadLayers();
 
 		super.create();
 
