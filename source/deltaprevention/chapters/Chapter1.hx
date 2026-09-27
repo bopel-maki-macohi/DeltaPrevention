@@ -17,7 +17,7 @@ class Chapter1 extends Chapter
 
 		lines = Language.instance.getTextLangFile('dialogue/txt_chapter1.txt');
 
-		map = new RealmMap('standard', 'test');
+		map = new RealmMap('standard', '0-0');
 		add(map.layers);
 		map.loadLayers();
 
