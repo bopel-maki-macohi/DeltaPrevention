@@ -1,5 +1,7 @@
 package deltaprevention;
 
+import flixel.util.FlxSpriteUtil;
+import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.FlxSprite;
@@ -17,32 +19,80 @@ class IntroState extends FlxState
 	var deltas:FlxSpriteContainer;
 	var deltaTimers:Array<Float> = [];
 
+	var deltaTimerSpeed:Float = 1.0;
+	var deltaXSpeed:Float = 1.0;
+	var deltaYSpeed:Float = 1.0;
+
+	var starWars:FlxText;
+	var rune = [
+		'ON THE DAY',
+		'WHERE THE DELTAS MERGE INTO',
+		'THE DELTA CRYSTAL',
+		'',
+		'THE LOTA WILL EMERGE',
+		'AND BRING',
+		'',
+		'THE CHAOS',
+		'',
+		'STRESSING THE WORLD',
+		'WITH HEAT FROM THE DELTA FURNACE',
+		'',
+		'MELTING IT',
+		'TO BE MOLDED',
+		'INTO THE DELTA EARTH',
+		'',
+		'THE ONLY WAY FOR THIS TO NOT HAPPEN',
+		'IS TO SEAL THE FURNACES OF THE DELTA REALMS',
+	];
+
+	var fade:FlxSprite;
+
+	var deltaCrystal:FlxSprite;
+	var deltaCrystalBoom:FlxSprite;
+
 	override function create()
 	{
 		super.create();
 
 		Assets.loadLibrary('intro');
 
+		add(starWars = new FlxText(0, 0, FlxG.width, rune.join('\n'), 32));
+		starWars.alignment = CENTER;
+		starWars.y = FlxG.height;
+		starWars.color = 0xFFFFFFFF;
+
+		add(fade = new FlxSprite().loadGraphic('fade.png'));
+		fade.scale.set(1280, 1);
+		fade.updateHitbox();
+		fade.screenCenter(X);
+		fade.flipY = true;
+
 		add(deltas = new FlxSpriteContainer());
+
+		add(deltaCrystal = new FlxSprite().loadGraphic('deltacrystal.png'));
+		deltaCrystal.alpha = 0.001;
+		deltaCrystal.screenCenter();
+
+		add(deltaCrystalBoom = new FlxSprite().loadGraphic('explosionOutline.png'));
+		deltaCrystalBoom.setGraphicSize(10);
+		deltaCrystalBoom.updateHitbox();
+		deltaCrystalBoom.alpha = 0.001;
+		deltaCrystalBoom.screenCenter();
 
 		track = new FlxSound().load('intro:fa1l-Angel.ogg');
 		FlxG.sound.list.add(track);
 
 		track.play();
 
+		FlxTween.tween(starWars, {y: -starWars.height}, 60);
+
 		new FlxTimer().start(1.43, t ->
 		{
 			if (t.loopsLeft == 8) t.time = 0.71;
 			spawnDelta();
 		}, 9);
-		// FlxTimer.wait(2.14, spawnDelta);
-		// FlxTimer.wait(2.86, spawnDelta);
-		// FlxTimer.wait(3.57, spawnDelta);
-		// FlxTimer.wait(3.57, spawnDelta);
-		// FlxTimer.wait(4.28, spawnDelta);
-		// FlxTimer.wait(5, spawnDelta);
-		// FlxTimer.wait(6.43, spawnDelta);
-		// FlxTimer.wait(7.14, spawnDelta);
+
+		FlxTimer.wait(12.86, beginTheChaos);
 	}
 
 	function spawnDelta()
@@ -55,10 +105,46 @@ class IntroState extends FlxState
 
 		delta.screenCenter();
 
-		delta.alpha = 0;
+		delta.alpha = 0.001;
 
 		FlxTween.tween(delta, {alpha: 1}, 1, {
 			ease: FlxEase.quintOut,
+		});
+	}
+
+	function beginTheChaos()
+	{
+		var flashColor = 0xFF066600;
+
+		FlxTween.tween(this, {
+			deltaTimerSpeed: 50,
+			deltaXSpeed: 0.0001,
+			deltaYSpeed: 0.0001,
+		}, 12, {
+			ease: FlxEase.backIn,
+			onUpdate: t ->
+			{
+				for (delta in deltas) if (FlxG.random.bool(deltaTimerSpeed))
+				{
+					FlxSpriteUtil.flashTint(delta, flashColor, 0.25);
+					(delta.animation.frameIndex + 1 >= delta.animation.numFrames) ? 0 : delta.animation.frameIndex += 1;
+				}
+			},
+			onComplete: t ->
+			{
+				deltas.visible = false;
+
+				deltaCrystal.alpha = 1;
+				FlxSpriteUtil.flashTint(deltaCrystal, flashColor, 0.5);
+
+				deltaCrystalBoom.color = flashColor;
+
+				FlxTween.num(10, FlxG.width, 0.5, {}, t ->
+				{
+					deltaCrystalBoom.setGraphicSize(t);
+					deltaCrystalBoom.alpha = 1 - (t / FlxG.width); 
+				});
+			}
 		});
 	}
 
@@ -66,14 +152,29 @@ class IntroState extends FlxState
 	{
 		super.update(elapsed);
 
-		for (delta in deltas)
+		if (deltas.visible) for (delta in deltas)
 		{
 			if (delta.alpha < 1) continue;
 
-			deltaTimers[delta.ID] += elapsed;
+			deltaTimers[delta.ID] += elapsed * deltaTimerSpeed;
 
-			delta.x = ((FlxG.width - delta.width) / 2) + (Math.sin(deltaTimers[delta.ID]) * 100);
-			delta.y = ((FlxG.height - delta.height) / 2) + (Math.cos(deltaTimers[delta.ID]) * 60) - delta.height * 7.65;
+			delta.screenCenter();
+			delta.x += ((Math.sin(deltaTimers[delta.ID]) * 100) * deltaXSpeed);
+			delta.y += (((Math.cos(deltaTimers[delta.ID]) * 60) - delta.height * 7.65) * deltaYSpeed);
 		}
+	}
+
+	override function onFocusLost()
+	{
+		super.onFocusLost();
+
+		track.pause();
+	}
+
+	override function onFocus()
+	{
+		super.onFocus();
+
+		track.resume();
 	}
 }
