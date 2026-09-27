@@ -51,6 +51,9 @@ class IntroState extends FlxState
 	var deltaCrystalBoom:FlxSprite;
 	var melting:Fade;
 
+	var heatwave:HeatwaveShader;
+	var heatwaveAmp:Float = 1.0;
+
 	override function create()
 	{
 		super.create();
@@ -85,6 +88,10 @@ class IntroState extends FlxState
 		melting.alpha = 0.001;
 		melting.screenCenter(X);
 		melting.color = 0xFF6600;
+
+		heatwave = new HeatwaveShader();
+		heatwave.x = FlxG.width;
+		starWars.shader = fade.shader = deltas.shader = deltaCrystal.shader = deltaCrystalBoom.shader = melting.shader = heatwave;
 
 		track = new FlxSound().load('intro:fa1l-Angel.ogg');
 		FlxG.sound.list.add(track);
@@ -177,6 +184,9 @@ class IntroState extends FlxState
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		heatwave.offset = FlxG.random.float(-16, 16) * heatwaveAmp;
+		heatwave.y = FlxG.height + 1 - (FlxG.height * heatwaveAmp);
 
 		if (deltas.visible) for (delta in deltas)
 		{
