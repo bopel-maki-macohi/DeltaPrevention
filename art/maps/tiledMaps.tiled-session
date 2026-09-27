@@ -1,0 +1,45 @@
+{
+    "activeFile": "lake.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "lake.tmx": {
+            "scale": 1.38,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 312.6811594202899,
+                "y": 248.91304347826093
+            }
+        },
+        "standard_tileset.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "D:/CODE2/haxeflixel/DeltaPrevention/assets/chapters/realm_standard",
+    "last.worldFilePath": "D:/CODE2/haxeflixel/DeltaPrevention/art",
+    "loadedWorlds": [
+        "D:/CODE2/haxeflixel/DeltaPrevention/art/w.world",
+        "D:/CODE2/haxeflixel/DeltaPrevention/art/w.world"
+    ],
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 40,
+    "openFiles": [
+        "standard_tileset.tsx",
+        "lake.tmx"
+    ],
+    "project": "tiledMaps.tiled-project",
+    "recentFiles": [
+        "standard_tileset.tsx",
+        "lake.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

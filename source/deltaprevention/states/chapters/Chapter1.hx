@@ -7,36 +7,27 @@ using StringTools;
 
 class Chapter1 extends Chapter
 {
-	var map:RealmMap;
+	var lake:RealmMapSprite;
+
 	var mapCam:FlxCamera;
 	var uiCam:FlxCamera;
 
-	var resetSeed:Bool = false;
-
-	static var seed:NInt;
-
 	override function create()
 	{
-		resetSeed = seed != null;
-		if (seed == null) seed = Save.instance.mapRandom.currentSeed;
-		else Save.instance.mapRandom.currentSeed = seed;
-
 		lines = Language.instance.getTextLangFile('dialogue/txt_chapter1.txt');
 
 		FlxG.cameras.reset(mapCam = new FlxCamera());
 		FlxG.cameras.add(uiCam = new FlxCamera(), false);
 		uiCam.bgColor = 0x00000000;
 
-		map = new RealmMap('standard', '0-0');
-		add(map.layers);
-		map.loadLayers(RealmMap.standard_mappings, RealmMap.standard_random_indices, RealmMap.standard_random_choices);
+		add(lake = new RealmMapSprite('standard', 'lake'));
+		lake.visible = false;
 
 		super.create();
 
 		dialogueText.cameras = [uiCam];
 
 		speak(0, 'gele');
-		map.layers.visible = false;
 	}
 
 	override function onDialogueNext()
@@ -47,7 +38,7 @@ class Chapter1 extends Chapter
 		{
 			case 1:
 				mapCam.zoom = 2;
-				map.layers.visible = true;
+				lake.visible = true;
 				dialogueText.y = dialogueText.height;
 		}
 	}
@@ -55,8 +46,6 @@ class Chapter1 extends Chapter
 	override function onChapterDone()
 	{
 		super.onChapterDone();
-
-		if (resetSeed) Save.instance.mapRandom.resetInitialSeed();
 
 		// TODO: dont forget to re-reset the camera
 	}

@@ -7,8 +7,6 @@ class Save extends FlxSave
 {
 	public static var instance:Save;
 
-	public var mapRandom:FlxRandom;
-
 	override public function new()
 	{
 		super();
@@ -17,11 +15,6 @@ class Save extends FlxSave
 
 		gameData ??= {};
 
-		#if NEW_SEED
-		mappingSeed = null;
-		#end
-		mapRandom = new FlxRandom(mappingSeed);
-
 		#if FORCE_INTRO
 		seenIntro = false;
 		#else
@@ -29,7 +22,6 @@ class Save extends FlxSave
 		#end
 
 		language ??= 'eng-US';
-		mappingSeed ??= mapRandom.currentSeed;
 	}
 
 	public var gameData(get, set):Dynamic;
@@ -50,6 +42,7 @@ class Save extends FlxSave
 
 	function set_language(language:String):String return gameData.language = language;
 
+	@:deprecated('Outdated as of cfe2036cd4f8d4f1bfb8fbd0ae910f32c26c7dcd')
 	public var mappingSeed(get, set):NInt;
 
 	function get_mappingSeed():NInt return gameData.mappingSeed;
