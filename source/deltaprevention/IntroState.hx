@@ -42,7 +42,6 @@ class IntroState extends FlxState
 	{
 		super.create();
 
-		Assets.loadLibrary('intro');
 		rune = Language.instance.getTextLangFile('rune.txt');
 
 		Save.instance.seenIntro = true;
