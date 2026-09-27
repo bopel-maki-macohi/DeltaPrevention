@@ -8,9 +8,9 @@ class Chapter1 extends Chapter
 {
 	override function create()
 	{
-		super.create();
-
 		lines = Language.instance.getTextLangFile('dialogue/txt_chapter1.txt');
+
+		super.create();
 
 		speak(0, 'gele');
 	}
@@ -18,8 +18,6 @@ class Chapter1 extends Chapter
 	override function onDialogueDone()
 	{
 		super.onDialogueDone();
-
-		trace(piece);
 
 		switch (piece) {}
 	}

@@ -20,6 +20,15 @@ class Chapter extends FlxState
 		add(dialogueText = new FlxTypeText(0, 0, 0, '', 16));
 		dialogueText.screenCenter();
 		dialogueText.completeCallback = onDialogueDone;
+
+		if (lines.length == 0) speak(0, '');
+	}
+
+	override function update(elapsed:Float)
+	{
+		super.update(elapsed);
+
+		dialogueText.screenCenter(X);
 	}
 
 	function speak(line:Int, speaker:String)
@@ -28,7 +37,7 @@ class Chapter extends FlxState
 		dialogueText.sounds = [
 			new FlxSound().load(Language.instance.getLangFile('dialogue/spkr_$speaker.ogg')),
 		];
-		dialogueText.start(null, false, false, [SPACE]);
+		dialogueText.start(dialogueText.delay, true, false, [SPACE]);
 	}
 
 	function onDialogueDone()
