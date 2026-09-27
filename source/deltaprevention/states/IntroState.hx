@@ -110,7 +110,7 @@ class IntroState extends FlxState
 
 	function beginTheChaos()
 	{
-		var flashColor = 0xFF066600;
+		var flashColor = 0xFF000666;
 
 		FlxTween.tween(this, {
 			deltaTimerSpeed: 50,
