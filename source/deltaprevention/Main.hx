@@ -1,13 +1,22 @@
 package deltaprevention;
 
+import flixel.FlxG;
+import openfl.events.Event;
 import flixel.FlxGame;
-import openfl.display.Sprite;
 
-class Main extends Sprite
+class Main extends FlxGame
 {
 	public function new()
 	{
-		super();
-		addChild(new FlxGame(0, 0, PlayState));
+		super(0, 0, null);
+	}
+
+	override function create(_:Event)
+	{
+		Save.instance = new Save();
+
+		super.create(_);
+
+		FlxG.switchState(() -> new IntroState());
 	}
 }
