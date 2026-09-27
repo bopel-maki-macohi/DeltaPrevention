@@ -1,4 +1,4 @@
-package;
+package deltaprevention;
 
 import flixel.FlxState;
 
