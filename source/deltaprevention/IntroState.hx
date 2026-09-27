@@ -43,6 +43,8 @@ class IntroState extends FlxState
 		'',
 		'THE ONLY WAY FOR THIS TO NOT HAPPEN',
 		'IS TO SEAL THE FURNACES OF THE DELTA REALMS',
+		'',
+		'CAN YOU DO THAT?'
 	];
 
 	var fade:Fade;
