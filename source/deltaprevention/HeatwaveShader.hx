@@ -10,60 +10,38 @@ class HeatwaveShader extends FlxRuntimeShader
 	{
 		super(Assets.getText('shaders/heatwave.frag'));
 
-        offset = 0;
-        x = 0;
-        y = 0;
-        width = FlxG.width;
-        height = FlxG.height;
+        time = 0;
+        scale = .5;
+        amp = 0.01;
 	}
 
-	public var x(get, set):Float;
+	public var time(get, set):Float;
 
-	function get_x():Float return getFloat('x');
+	function get_time():Float return getFloat('time');
 
-	function set_x(x:Float):Float
+	function set_time(time:Float):Float
 	{
-		setFloat('x', x);
-		return getFloat('x');
+		setFloat('time', time);
+		return getFloat('time');
 	}
 
-	public var y(get, set):Float;
+	public var scale(get, set):Float;
 
-	function get_y():Float return getFloat('y');
+	function get_scale():Float return getFloat('scale');
 
-	function set_y(y:Float):Float
+	function set_scale(scale:Float):Float
 	{
-		setFloat('y', y);
-		return getFloat('y');
+		setFloat('scale', scale);
+		return getFloat('scale');
 	}
 
-	public var width(get, set):Float;
+	public var amp(get, set):Float;
 
-	function get_width():Float return getFloat('width');
+	function get_amp():Float return getFloat('amp');
 
-	function set_width(width:Float):Float
+	function set_amp(amp:Float):Float
 	{
-		setFloat('width', width);
-		return getFloat('width');
-	}
-
-	public var height(get, set):Float;
-
-	function get_height():Float return getFloat('height');
-
-	function set_height(height:Float):Float
-	{
-		setFloat('height', height);
-		return getFloat('height');
-	}
-
-	public var offset(get, set):Float;
-
-	function get_offset():Float return getFloat('offset');
-
-	function set_offset(offset:Float):Float
-	{
-		setFloat('offset', offset);
-		return getFloat('offset');
+		setFloat('amp', amp);
+		return getFloat('amp');
 	}
 }

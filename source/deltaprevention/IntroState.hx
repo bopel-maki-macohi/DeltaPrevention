@@ -52,7 +52,7 @@ class IntroState extends FlxState
 	var melting:Fade;
 
 	var heatwave:HeatwaveShader;
-	var heatwaveAmp:Float = 1.0;
+	var heatwaveAmp:Float = 0.0;
 
 	override function create()
 	{
@@ -90,7 +90,6 @@ class IntroState extends FlxState
 		melting.color = 0xFF6600;
 
 		heatwave = new HeatwaveShader();
-		heatwave.x = FlxG.width;
 		starWars.shader = fade.shader = deltas.shader = deltaCrystal.shader = deltaCrystalBoom.shader = melting.shader = heatwave;
 
 		track = new FlxSound().load('intro:fa1l-Angel.ogg');
@@ -148,6 +147,13 @@ class IntroState extends FlxState
 			},
 		});
 
+		theChaosCrystal(flashColor);
+
+		theMelting();
+	}
+
+	function theChaosCrystal(flashColor:Int)
+	{
 		deltaCrystalBoom.color = flashColor;
 		deltaCrystalBoom.alpha = 0.0001;
 
@@ -166,10 +172,20 @@ class IntroState extends FlxState
 			deltaCrystalBoom.setGraphicSize(t);
 			deltaCrystalBoom.alpha = 1 - (t / FlxG.width);
 		});
+	}
 
+	function theMelting()
+	{
 		FlxTween.tween(melting, {alpha: 1}, 15, {
 			startDelay: 12,
 			ease: FlxEase.cubeIn
+		});
+
+		FlxTween.num(0, 1, 15, {
+			startDelay: 12,
+		}, t ->
+		{
+			heatwaveAmp = t;
 		});
 	}
 
@@ -185,8 +201,10 @@ class IntroState extends FlxState
 	{
 		super.update(elapsed);
 
-		heatwave.offset = FlxG.random.float(-16, 16) * heatwaveAmp;
-		heatwave.y = FlxG.height + 1 - (FlxG.height * heatwaveAmp);
+		heatwave.time += elapsed * heatwaveAmp;
+		heatwave.scale = heatwaveAmp;
+
+		heatwave.amp = 0.01 * heatwaveAmp / 1;
 
 		if (deltas.visible) for (delta in deltas)
 		{

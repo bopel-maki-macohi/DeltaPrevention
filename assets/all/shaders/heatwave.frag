@@ -1,22 +1,18 @@
 #pragma header
 
-uniform float offset;
-
-uniform float width;
-uniform float height;
-
-uniform float x;
-uniform float y;
+uniform float amp;
+uniform float time;
+uniform float scale;
 
 void main()
 {
     vec2 uv = openfl_TextureCoordv;
+    
+    // Time varying pixel color
+    float jacked_time = 5.5*time;
 
-    if (uv.x > x / width)
-        uv.x += offset / width;
-    if (uv.y > y / height)
-        uv.y += offset / height;
+    uv += amp*sin(scale*jacked_time + length( uv )*10.0);
 
-    vec4 color = texture2D(bitmap, uv);
+    vec4 color = flixel_texture2D(bitmap, uv);
     gl_FragColor = color;
 }
