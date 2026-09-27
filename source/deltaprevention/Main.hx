@@ -1,5 +1,6 @@
 package deltaprevention;
 
+import deltaprevention.chapters.Chapter1;
 import flixel.FlxG;
 import openfl.events.Event;
 import flixel.FlxGame;
@@ -17,6 +18,7 @@ class Main extends FlxGame
 
 		super.create(_);
 
-		FlxG.switchState(() -> new IntroState());
+		if (Save.instance.seenIntro) FlxG.switchState(() -> new Chapter1());
+		else FlxG.switchState(() -> new IntroState());
 	}
 }

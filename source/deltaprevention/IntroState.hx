@@ -1,5 +1,6 @@
 package deltaprevention;
 
+import deltaprevention.chapters.Chapter1;
 import flixel.FlxBasic;
 import flixel.FlxObject;
 import flixel.util.FlxSpriteUtil;
@@ -207,7 +208,10 @@ class IntroState extends FlxState
 
 		track.fadeOut(5, 0, t ->
 		{
-			FlxG.switchState(() -> new FlxState());
+			FlxG.sound.list.remove(track);
+			track.stop();
+
+			FlxG.switchState(() -> new Chapter1());
 		});
 	}
 
