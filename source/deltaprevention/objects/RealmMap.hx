@@ -1,4 +1,4 @@
-package deltaprevention;
+package deltaprevention.objects;
 
 import flixel.util.FlxSort;
 import flixel.group.FlxContainer.FlxTypedContainer;

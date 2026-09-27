@@ -1,4 +1,4 @@
-package deltaprevention;
+package deltaprevention.objects;
 
 import flixel.FlxG;
 import flixel.FlxSprite;

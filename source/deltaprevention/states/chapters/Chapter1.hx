@@ -1,4 +1,4 @@
-package deltaprevention.chapters;
+package deltaprevention.states.chapters;
 
 using StringTools;
 

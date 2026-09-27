@@ -1,4 +1,4 @@
-package deltaprevention;
+package deltaprevention.shaders;
 
 import flixel.FlxG;
 import lime.utils.Assets;

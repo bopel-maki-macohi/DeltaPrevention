@@ -1,4 +1,4 @@
-package deltaprevention.chapters;
+package deltaprevention.states.chapters;
 
 import flixel.FlxG;
 import flixel.util.FlxTimer;

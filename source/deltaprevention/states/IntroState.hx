@@ -1,6 +1,5 @@
-package deltaprevention;
+package deltaprevention.states;
 
-import deltaprevention.chapters.Chapter1;
 import flixel.FlxBasic;
 import flixel.FlxObject;
 import flixel.util.FlxSpriteUtil;

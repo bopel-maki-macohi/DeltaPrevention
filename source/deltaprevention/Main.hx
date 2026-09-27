@@ -2,7 +2,6 @@ package deltaprevention;
 
 import haxe.Json;
 import lime.utils.Assets;
-import deltaprevention.chapters.Chapter1;
 import flixel.FlxG;
 import openfl.events.Event;
 import flixel.FlxGame;
