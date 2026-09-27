@@ -92,4 +92,6 @@
 	<!-- _________________________________ Custom _______________________________ -->
 
 	<!--Place custom nodes like icons here-->
+	<icon path="assets/all/delta.png" unless="debug"/>
+	<icon path="assets/all/deltacrystal.png" if="debug"/>
 </project>
