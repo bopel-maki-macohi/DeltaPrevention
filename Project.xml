@@ -35,7 +35,7 @@
 	<source path="source" />
 
 	<assets embed="true" rename="" path="assets/all" library="default"/>
-	<!-- <assets embed="true" rename="" path="assets/chapter1" library="chapter1" /> -->
+	<assets embed="true" rename="" path="assets/intro" library="intro"/>
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
