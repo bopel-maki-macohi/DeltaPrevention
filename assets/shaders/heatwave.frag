@@ -4,6 +4,7 @@ uniform float amp;
 uniform float time;
 uniform float scale;
 
+// source: https://www.shadertoy.com/view/td3GRn
 void main()
 {
     vec2 uv = openfl_TextureCoordv;
