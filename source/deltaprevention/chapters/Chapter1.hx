@@ -19,7 +19,7 @@ class Chapter1 extends Chapter
 
 		map = new RealmMap('standard', '0-0');
 		add(map.layers);
-		map.loadLayers();
+		map.loadLayers(RealmMap.standard_mappings, RealmMap.standard_random_indices, RealmMap.standard_random_choices);
 
 		super.create();
 

@@ -15,10 +15,13 @@ class Save extends FlxSave
 
 		bind('DeltaPrevention', '.Maverick');
 
+		gameData ??= {};
+
+		#if NEW_SEED
+		mappingSeed = null;
+		#end
 		mapRandom = new FlxRandom(mappingSeed);
 
-		gameData ??= {};
-		
 		#if FORCE_INTRO
 		seenIntro = false;
 		#else
