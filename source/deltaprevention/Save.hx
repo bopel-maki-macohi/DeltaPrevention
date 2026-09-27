@@ -13,7 +13,11 @@ class Save extends FlxSave
 		bind('DeltaPrevention', '.Maverick');
 
         gameData ??= {};
+		#if FORCE_INTRO
+        seenIntro = false;
+		#else
         seenIntro ??= false;
+		#end
 	}
 
 	public var gameData(get, set):Dynamic;
