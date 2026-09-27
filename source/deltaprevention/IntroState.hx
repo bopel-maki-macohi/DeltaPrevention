@@ -45,10 +45,11 @@ class IntroState extends FlxState
 		'IS TO SEAL THE FURNACES OF THE DELTA REALMS',
 	];
 
-	var fade:FlxSprite;
+	var fade:Fade;
 
 	var deltaCrystal:FlxSprite;
 	var deltaCrystalBoom:FlxSprite;
+	var melting:Fade;
 
 	override function create()
 	{
@@ -56,14 +57,15 @@ class IntroState extends FlxState
 
 		Assets.loadLibrary('intro');
 
+		Save.instance.seenIntro = true;
+
 		add(starWars = new FlxText(0, 0, FlxG.width, rune.join('\n'), 32));
 		starWars.alignment = CENTER;
 		starWars.y = FlxG.height;
 		starWars.color = 0xFFFFFFFF;
 
-		add(fade = new FlxSprite().loadGraphic('fade.png'));
-		fade.scale.set(1280, 1);
-		fade.updateHitbox();
+		add(fade = new Fade());
+		fade.color = 0xFF000000;
 		fade.screenCenter(X);
 		fade.flipY = true;
 
@@ -79,6 +81,11 @@ class IntroState extends FlxState
 		deltaCrystalBoom.alpha = 0.001;
 		deltaCrystalBoom.screenCenter();
 
+		add(melting = new Fade());
+		melting.alpha = 0.001;
+		melting.screenCenter(X);
+		melting.color = 0xFF6600;
+
 		track = new FlxSound().load('intro:fa1l-Angel.ogg');
 		FlxG.sound.list.add(track);
 
@@ -93,6 +100,8 @@ class IntroState extends FlxState
 		}, 9);
 
 		FlxTimer.wait(12.86, beginTheChaos);
+
+		FlxTimer.wait(70, beginToEnd);
 	}
 
 	function spawnDelta()
@@ -130,21 +139,38 @@ class IntroState extends FlxState
 					(delta.animation.frameIndex + 1 >= delta.animation.numFrames) ? 0 : delta.animation.frameIndex += 1;
 				}
 			},
-			onComplete: t ->
-			{
-				deltas.visible = false;
+		});
 
-				deltaCrystal.alpha = 1;
-				FlxSpriteUtil.flashTint(deltaCrystal, flashColor, 0.5);
+		deltaCrystalBoom.color = flashColor;
+		deltaCrystalBoom.alpha = 0.0001;
 
-				deltaCrystalBoom.color = flashColor;
+		FlxTimer.wait(12, () ->
+		{
+			deltas.visible = false;
 
-				FlxTween.num(10, FlxG.width, 0.5, {}, t ->
-				{
-					deltaCrystalBoom.setGraphicSize(t);
-					deltaCrystalBoom.alpha = 1 - (t / FlxG.width); 
-				});
-			}
+			deltaCrystal.alpha = 1;
+			FlxSpriteUtil.flashTint(deltaCrystal, flashColor, 0.5);
+		});
+
+		FlxTween.num(10, FlxG.width, 0.5, {
+			startDelay: 12,
+		}, t ->
+		{
+			deltaCrystalBoom.setGraphicSize(t);
+			deltaCrystalBoom.alpha = 1 - (t / FlxG.width);
+		});
+
+		FlxTween.tween(melting, {alpha: 1}, 15, {
+			startDelay: 12,
+			ease: FlxEase.cubeIn
+		});
+	}
+
+	function beginToEnd()
+	{
+		track.fadeOut(5, 0, t ->
+		{
+			FlxG.switchState(() -> new FlxState());
 		});
 	}
 
