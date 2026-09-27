@@ -1,5 +1,7 @@
 package deltaprevention;
 
+import flixel.FlxBasic;
+import flixel.FlxObject;
 import flixel.util.FlxSpriteUtil;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
@@ -43,6 +45,8 @@ class IntroState extends FlxState
 		'',
 		'THE ONLY WAY FOR THIS TO NOT HAPPEN',
 		'IS TO SEAL THE FURNACES OF THE DELTA REALMS',
+		'',
+		'',
 		'',
 		'CAN YOU DO THAT?'
 	];
@@ -99,7 +103,7 @@ class IntroState extends FlxState
 
 		track.play();
 
-		FlxTween.tween(starWars, {y: -starWars.height}, 60);
+		FlxTween.tween(starWars, {y: -starWars.height}, 70);
 
 		new FlxTimer().start(1.43, t ->
 		{
@@ -193,6 +197,14 @@ class IntroState extends FlxState
 
 	function beginToEnd()
 	{
+		for (basic in members) if (basic is FlxSprite)
+		{
+			final sprite = cast(basic, FlxSprite);
+			if (sprite == null) continue;
+
+			FlxSpriteUtil.fadeOut(sprite, 5);
+		}
+
 		track.fadeOut(5, 0, t ->
 		{
 			FlxG.switchState(() -> new FlxState());
