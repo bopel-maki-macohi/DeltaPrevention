@@ -33,9 +33,7 @@
 	<set name="BUILD_DIR" value="export/debug" if="debug" />
 
 	<source path="source" />
-
-	<assets embed="true" rename="" path="assets/all" library="default"/>
-	<assets embed="true" rename="" path="assets/intro" library="intro"/>
+	<assets embed="true" path="assets" rename=""/>
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
@@ -92,6 +90,6 @@
 	<!-- _________________________________ Custom _______________________________ -->
 
 	<!--Place custom nodes like icons here-->
-	<icon path="assets/all/delta.png" unless="debug"/>
-	<icon path="assets/all/deltacrystal.png" if="debug"/>
+	<icon path="assets/delta.png" unless="debug"/>
+	<icon path="assets/deltacrystal.png" if="debug"/>
 </project>

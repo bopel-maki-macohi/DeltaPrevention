@@ -27,32 +27,7 @@ class IntroState extends FlxState
 	var deltaYSpeed:Float = 1.0;
 
 	var starWars:FlxText;
-	var rune = [
-		'ON THE DAY',
-		'WHERE THE DELTAS MERGE INTO',
-		'THE DELTA CRYSTAL',
-		'',
-		'THE LOTA WILL EMERGE',
-		'AND BRING',
-		'',
-		'THE CHAOS',
-		'',
-		'STRESSING THE WORLD',
-		'WITH HEAT FROM THE DELTA FURNACE',
-		'',
-		'MELTING IT',
-		'TO BE MOLDED',
-		'INTO THE DELTA EARTH',
-		'',
-		'THE ONLY WAY',
-		'FOR THIS TO NOT HAPPEN',
-		'IS TO SEAL THE FURNACES',
-		'OF THE DELTA REALMS',
-		'',
-		'',
-		'',
-		'CAN YOU DO THAT?'
-	];
+	var rune = [];
 
 	var fade:Fade;
 
@@ -68,6 +43,7 @@ class IntroState extends FlxState
 		super.create();
 
 		Assets.loadLibrary('intro');
+		rune = Language.instance.getTextLangFile('rune.txt');
 
 		Save.instance.seenIntro = true;
 
@@ -99,7 +75,7 @@ class IntroState extends FlxState
 		heatwave = new HeatwaveShader();
 		starWars.shader = fade.shader = deltas.shader = deltaCrystal.shader = deltaCrystalBoom.shader = melting.shader = heatwave;
 
-		track = new FlxSound().load('intro:fa1l-Angel.ogg');
+		track = new FlxSound().load('fa1l-Angel.ogg');
 		FlxG.sound.list.add(track);
 
 		track.play();

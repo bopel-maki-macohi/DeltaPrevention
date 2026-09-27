@@ -10,9 +10,7 @@ class Chapter1 extends Chapter
 	{
 		super.create();
 
-		lines = [
-			for (line in Assets.getText(Language.instance.getLangFile('dialogue/chapter1.txt')).split('\n')) line.trim()
-		];
+		lines = Language.instance.getTextLangFile('dialogue/txt_chapter1.txt');
 
 		speak(0, 'gele');
 	}

@@ -34,5 +34,9 @@ class Chapter extends FlxState
 	function onDialogueDone()
 	{
 		piece++;
+
+		if (piece >= lines.length - 1) onChapterDialogueDone();
 	}
+
+	function onChapterDialogueDone() {}
 }
