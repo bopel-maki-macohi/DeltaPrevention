@@ -1,8 +1,8 @@
 package deltaprevention.chapters;
 
+import flixel.util.FlxTimer;
 import flixel.sound.FlxSound;
 import flixel.addons.text.FlxTypeText;
-import flixel.text.FlxText;
 import flixel.FlxState;
 
 class Chapter extends FlxState
@@ -48,4 +48,6 @@ class Chapter extends FlxState
 	}
 
 	function onChapterDialogueDone() {}
+
+	function wait(time:Float, method:Void->Void) FlxTimer.wait(time, method);
 }
