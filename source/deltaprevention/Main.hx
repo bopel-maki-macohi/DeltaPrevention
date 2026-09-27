@@ -54,13 +54,15 @@ class Main extends FlxGame
 
 		for (i in 0...16)
 		{
-			var j = i + 1;
+			var j = 1 + (i * 4);
 			var chance:NFloat = null;
 
-			if ([SurfaceTiles.GRASS,SurfaceTiles.DIRT].contains(j)) chance = 50;
-			if ([SurfaceTiles.WATER].contains(j)) chance = 65;
+			if ([SurfaceTiles.GRASS].contains(j)) chance = 50;
+			if ([SurfaceTiles.DIRT, SurfaceTiles.WATER].contains(j)) chance = 65;
 
-			indicesAndChoices(s_ri, s_rc, 1 + (i * 4), 4,chance);
+			if (SurfaceTiles.PATH_SMALL.contains(j) || SurfaceTiles.PATH_LARGE.contains(j)) chance = 75;
+
+			indicesAndChoices(s_ri, s_rc, j, 4, chance);
 		};
 
 		// trace(s_ri);
