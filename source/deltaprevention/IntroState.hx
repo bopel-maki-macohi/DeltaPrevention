@@ -87,9 +87,7 @@ class IntroState extends FlxState
 		deltaCrystal.screenCenter();
 
 		add(deltaCrystalBoom = new FlxSprite().loadGraphic('explosionOutline.png'));
-		deltaCrystalBoom.setGraphicSize(10);
-		deltaCrystalBoom.updateHitbox();
-		deltaCrystalBoom.alpha = 0.001;
+		deltaCrystalBoom.alpha = 0.0001;
 		deltaCrystalBoom.screenCenter();
 
 		add(melting = new Fade());
