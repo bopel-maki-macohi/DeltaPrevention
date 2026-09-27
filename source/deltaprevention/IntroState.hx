@@ -43,8 +43,10 @@ class IntroState extends FlxState
 		'TO BE MOLDED',
 		'INTO THE DELTA EARTH',
 		'',
-		'THE ONLY WAY FOR THIS TO NOT HAPPEN',
-		'IS TO SEAL THE FURNACES OF THE DELTA REALMS',
+		'THE ONLY WAY',
+		'FOR THIS TO NOT HAPPEN',
+		'IS TO SEAL THE FURNACES',
+		'OF THE DELTA REALMS',
 		'',
 		'',
 		'',
@@ -103,7 +105,7 @@ class IntroState extends FlxState
 
 		track.play();
 
-		FlxTween.tween(starWars, {y: -starWars.height}, 70);
+		FlxTween.tween(starWars, {y: -starWars.height}, 80);
 
 		new FlxTimer().start(1.43, t ->
 		{
