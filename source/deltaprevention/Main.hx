@@ -52,14 +52,16 @@ class Main extends FlxGame
 		var s_ri:Array<Int> = [65, 89];
 		var s_rc:Array<Array<Int>> = [[65, 66, 67, 68], [89, 90]];
 
-		for (i in 0...16) indicesAndChoices(s_ri, s_rc, 1 + (i * 4), 4, switch (i + 1)
+		for (i in 0...16)
 		{
-			case 1:
-				50;
+			var j = i + 1;
+			var chance:NFloat = null;
 
-			case _:
-				null;
-		});
+			if ([SurfaceTiles.GRASS,SurfaceTiles.DIRT].contains(j)) chance = 50;
+			if ([SurfaceTiles.WATER].contains(j)) chance = 65;
+
+			indicesAndChoices(s_ri, s_rc, 1 + (i * 4), 4,chance);
+		};
 
 		// trace(s_ri);
 		// trace(s_rc);

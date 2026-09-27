@@ -1,0 +1,30 @@
+package deltaprevention.objects;
+
+enum abstract SurfaceTiles(Int) from Int to Int
+{
+	public static var GRASS = 1;
+
+	public static var PATH_HORIZONTAL_SMALL = GRASS + 4;
+	public static var PATH_HORIZONTAL_SMALL_END = PATH_HORIZONTAL_SMALL + 4;
+	public static var PATH_VERTICAL_SMALL = PATH_VERTICAL_SMALL_END + 4;
+	public static var PATH_VERTICAL_SMALL_END = PATH_VERTICAL_SMALL + 4;
+
+	public static var PATH_HORIZONTAL_LARGE_TOP = PATH_VERTICAL_SMALL_END + 4;
+	public static var PATH_HORIZONTAL_LARGE_TOP_END = PATH_HORIZONTAL_LARGE_TOP + 4;
+	public static var PATH_VERTICAL_LARGE_TOP = PATH_VERTICAL_LARGE_TOP_END + 4;
+	public static var PATH_VERTICAL_LARGE_TOP_END = PATH_VERTICAL_LARGE_TOP + 4;
+
+	public static var PATH_HORIZONTAL_LARGE_BOTTOM = PATH_VERTICAL_LARGE_TOP_END + 4;
+	public static var PATH_HORIZONTAL_LARGE_BOTTOM_END = PATH_HORIZONTAL_LARGE_BOTTOM + 4;
+	public static var PATH_VERTICAL_LARGE_BOTTOM = PATH_VERTICAL_LARGE_BOTTOM_END + 4;
+	public static var PATH_VERTICAL_LARGE_BOTTOM_END = PATH_VERTICAL_LARGE_BOTTOM + 4;
+
+	public static var DIRT = PATH_VERTICAL_LARGE_BOTTOM_END + 4;
+    
+	public static var PATH_HORIZONTAL_LARGE_TOP_EDGE = DIRT + 4;
+	public static var PATH_HORIZONTAL_LARGE_BOTTOM_EDGE = PATH_HORIZONTAL_LARGE_TOP_EDGE + 4;
+
+	public static var WATER = PATH_HORIZONTAL_LARGE_BOTTOM_EDGE + 4;
+
+	// public static var BORDER = WATER + 4;
+}
