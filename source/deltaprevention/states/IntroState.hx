@@ -62,7 +62,7 @@ class IntroState extends FlxState
 		deltaCrystal.screenCenter();
 
 		add(deltaCrystalBoom = new FlxSprite().loadGraphic('explosionOutline.png'));
-		deltaCrystalBoom.alpha = 0.0001;
+		deltaCrystalBoom.visible = false;
 		deltaCrystalBoom.screenCenter();
 
 		add(melting = new Fade());
@@ -134,7 +134,6 @@ class IntroState extends FlxState
 	function theChaosCrystal()
 	{
 		deltaCrystalBoom.color = Main.deltaColor;
-		deltaCrystalBoom.alpha = 0.0001;
 
 		FlxTimer.wait(12, () ->
 		{
@@ -146,6 +145,10 @@ class IntroState extends FlxState
 
 		FlxTween.num(10, FlxG.width, 0.5, {
 			startDelay: 12,
+			onStart: t ->
+			{
+				deltaCrystalBoom.visible = true;
+			}
 		}, t ->
 		{
 			deltaCrystalBoom.setGraphicSize(t);
@@ -170,6 +173,8 @@ class IntroState extends FlxState
 
 	function beginToEnd()
 	{
+		FlxSpriteUtil.flashTint(deltaCrystal, Main.deltaColor, 4.9);
+
 		for (basic in members) if (basic is FlxSprite)
 		{
 			final sprite = cast(basic, FlxSprite);
