@@ -44,10 +44,8 @@ class Chapter1 extends Chapter
 		super.create();
 
 		dialogueTextBG.alpha = 0.001;
-
 		dialogueTextBG.cameras = dialogueText.cameras = [uiCam];
-
-		dialogueText.y -= dialogueText.height * 2;
+		dialogueText.y -= dialogueText.height * 4;
 
 		lake.screenCenter();
 
@@ -85,6 +83,7 @@ class Chapter1 extends Chapter
 
 				wait(0.975, () -> lakeGele.play('jab'));
 				wait(1, () -> lakeLexia.play('hit'));
+				wait(1, () -> FlxG.sound.play('sfx/dmg.ogg'));
 				wait(1.1, () -> lakeGele.play('knee'));
 				wait(1.5, onDialogueNext);
 
