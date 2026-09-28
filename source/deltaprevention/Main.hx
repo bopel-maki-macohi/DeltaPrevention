@@ -23,9 +23,10 @@ class Main extends FlxGame
 		Save.instance = new Save();
 		Language.instance = new Language();
 
-		super.create(_);
-
 		FlxG.mouse.enabled = false;
+		FlxG.mouse.visible = false;
+
+		super.create(_);
 
 		if (!_lostFocus) proceed();
 	}
