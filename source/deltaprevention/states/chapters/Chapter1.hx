@@ -26,7 +26,7 @@ class Chapter1 extends Chapter
 		add(lake = new RealmMapSprite('standard', 'lake'));
 		lake.alpha = 0.001;
 
-		add(lakeLexia = new Character('chapter1/lexia-lake', 32, 48, [
+		add(lakeLexia = new Character('chapter1/lexia-lake', 48, 48, [
 			'sleep' => {frames: [0]},
 			'hit' => {frames: [1, 2], fps: 16},
 			'sideeye' => {frames: [3]},
@@ -36,7 +36,8 @@ class Chapter1 extends Chapter
 		add(lakeGele = new Character('chapter1/gele-lake', 48, 64, [
 			'knee' => {frames: [0]},
 			'jab' => {frames: [1, 2], fps: 30},
-			'stand' => {frames: [3]},
+			'gettingup' => {frames: [3]},
+			'standlookdown' => {frames: [4]},
 		]));
 		lakeGele.play('knee');
 		lakeGele.alpha = 0.001;
@@ -53,6 +54,7 @@ class Chapter1 extends Chapter
 
 		lakeGele.screenCenter();
 		lakeGele.x -= lakeGele.width / 2;
+		lakeGele.y -= lakeGele.height / 8;
 
 		speak(null, 'default');
 	}
@@ -88,6 +90,17 @@ class Chapter1 extends Chapter
 				wait(1.5, onDialogueNext);
 
 			case 2: lakeLexia.play('sideeye');
+
+			case 3:
+
+			case 4:
+				lakeGele.play('gettingup');
+				wait(.5, () -> lakeGele.play('standlookdown'));
+			case 5:
+
+			case 6:
+
+			case 7:
 		}
 
 		speak(null, switch (piece)
