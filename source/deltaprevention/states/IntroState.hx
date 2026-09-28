@@ -183,7 +183,7 @@ class IntroState extends FlxState
 			FlxG.sound.list.remove(track);
 			track.stop();
 
-			FlxG.switchState(() -> new MenuState());
+			FlxG.switchState(() -> new Chapter1());
 		});
 	}
 
