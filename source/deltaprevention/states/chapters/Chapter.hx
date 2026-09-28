@@ -85,7 +85,7 @@ class Chapter extends FlxState
 
 	function endingCheck()
 	{
-		if (piece >= lines.length - 1)
+		if (piece > lines.length - 1)
 		{
 			onChapterDone();
 			return true;

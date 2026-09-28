@@ -1,5 +1,6 @@
 package deltaprevention.states.chapters;
 
+import flixel.FlxObject;
 import flixel.util.FlxTimer;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -15,6 +16,8 @@ class Chapter1 extends Chapter
 	var lakeGele:Character;
 
 	var mapCam:FlxCamera;
+	var mapCamObject:FlxObject;
+
 	var uiCam:FlxCamera;
 
 	override function create()
@@ -81,7 +84,7 @@ class Chapter1 extends Chapter
 				dialogueTextBG.alpha = 1;
 				lakeGele.alpha = lake.alpha = 1;
 
-				mapCam.zoom = 0.75;
+				mapCam.zoom = 3;
 
 				FlxTween.tween(mapCam, {zoom: 2}, 2, {ease: FlxEase.backOut});
 
@@ -110,6 +113,7 @@ class Chapter1 extends Chapter
 					lakeLexia.play('up');
 					FlxTween.tween(lakeLexia, {x: lakeLexia.x - lakeLexia.width / 2}, 2, {ease: FlxEase.expoOut});
 					lakeLexia.y -= lakeLexia.height / 10;
+					FlxTween.tween(mapCamObject, {x: mapCamObject.x - FlxG.width / 16}, 2, {ease: FlxEase.sineOut});
 				});
 				wait(.5, () -> lakeGele.play('standlookdown'));
 			case 5:
@@ -123,6 +127,9 @@ class Chapter1 extends Chapter
 		{
 			case 1, 3, 6: 'gele';
 			case 2, 4, 5: 'lexia';
+			case _: null;
+		}, switch (piece)
+		{
 			case _: null;
 		});
 
@@ -141,5 +148,8 @@ class Chapter1 extends Chapter
 		FlxG.cameras.reset(mapCam = new FlxCamera());
 		FlxG.cameras.add(uiCam = new FlxCamera(), false);
 		uiCam.bgColor = 0x00000000;
+
+		add(mapCamObject = new FlxObject(FlxG.width / 2, FlxG.height / 2));
+		mapCam.follow(mapCamObject);
 	}
 }
