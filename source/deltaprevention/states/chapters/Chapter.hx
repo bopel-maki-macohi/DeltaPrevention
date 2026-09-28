@@ -17,6 +17,7 @@ class Chapter extends FlxState
 
 	var dialogueText:FlxTypeText;
 	var dialogueTextBG:FlxSprite;
+	var dialogueSound:FlxSound;
 
 	var lines:Array<String> = [];
 
@@ -30,7 +31,9 @@ class Chapter extends FlxState
 		dialogueText.screenCenter();
 		dialogueText.completeCallback = onDialogueDone;
 
-		if (lines.length == 0) speak(0, '');
+		dialogueSound = new FlxSound();
+
+		if (lines.length == 0) speak(0, null);
 	}
 
 	override function update(elapsed:Float)
@@ -58,7 +61,10 @@ class Chapter extends FlxState
 		proceedTime = time;
 
 		dialogueText.resetText(lines[line ?? piece] ?? 'Lorem Ipsum Dolor Sit Amet');
-		dialogueText.sounds = [new FlxSound().load('sfx/dialogue/spkr_$speaker.ogg'),];
+
+		if (speaker == null) dialogueText.sounds = [];
+		else dialogueText.sounds = [dialogueSound.load('sfx/dialogue/spkr_$speaker.ogg'),];
+
 		dialogueText.start(dialogueText.delay, true, false, [SPACE]);
 	}
 

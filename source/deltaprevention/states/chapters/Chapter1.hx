@@ -88,14 +88,15 @@ class Chapter1 extends Chapter
 				wait(1.1, () -> lakeGele.play('knee'));
 				wait(1.5, onDialogueNext);
 
-				speak(null, 'gele');
-
-			case 2:
-				lakeLexia.play('sideeye');
-				speak(null, 'lexia');
-
-			default: onDialogueNext();
+			case 2: lakeLexia.play('sideeye');
 		}
+
+		speak(null, switch (piece)
+		{
+			case 0, 1, 3, 6: 'gele';
+			case 2, 4, 5: 'lexia';
+			case _: null;
+		});
 
 		endingCheck();
 	}
