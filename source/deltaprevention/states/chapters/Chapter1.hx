@@ -30,6 +30,8 @@ class Chapter1 extends Chapter
 			'sleep' => {frames: [0]},
 			'hit' => {frames: [1, 2], fps: 16},
 			'sideeye' => {frames: [3]},
+			'moving' => {frames: [4]},
+			'up' => {frames: [5]},
 		]));
 		lakeLexia.play('sleep');
 
@@ -95,8 +97,20 @@ class Chapter1 extends Chapter
 			case 3:
 
 			case 4:
+				lakeLexia.shake(.5, .25, 50);
+				lakeLexia.play('moving');
+
 				lakeGele.shake(.25, .5, 50);
 				lakeGele.play('gettingup');
+
+				FlxTween.tween(lakeGele, {x: lakeGele.x - lakeLexia.width / 2}, 2, {startDelay: .2, ease: FlxEase.expoOut});
+
+				wait(.25, () ->
+				{
+					lakeLexia.play('up');
+					FlxTween.tween(lakeLexia, {x: lakeLexia.x - lakeLexia.width / 2}, 2, {ease: FlxEase.expoOut});
+					lakeLexia.y -= lakeLexia.height / 10;
+				});
 				wait(.5, () -> lakeGele.play('standlookdown'));
 			case 5:
 

@@ -28,7 +28,12 @@ class Character extends FlxSprite
 
 		var offsetsApplied = 0.0;
 
-		FlxTween.num(0, 1, time, {}, t ->
+		FlxTween.num(0, 1, time, {
+			onComplete: t ->
+			{
+				offset.subtract(offsetsApplied);
+			}
+		}, t ->
 		{
 			if (FlxG.random.bool(100 - snappyAmount))
 			{
@@ -37,7 +42,5 @@ class Character extends FlxSprite
 				offset.add(amount);
 			}
 		});
-
-		offset.subtract(offsetsApplied);
 	}
 }
