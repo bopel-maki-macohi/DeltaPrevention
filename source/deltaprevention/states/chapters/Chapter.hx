@@ -10,7 +10,10 @@ import flixel.FlxState;
 class Chapter extends FlxState
 {
 	var piece = 0;
+
+	var autoProceed = true;
 	var proceedable = false;
+	var proceedTime:NFloat = null;
 
 	var dialogueText:FlxTypeText;
 	var dialogueTextBG:FlxSprite;
@@ -21,7 +24,7 @@ class Chapter extends FlxState
 	{
 		super.create();
 
-		add(dialogueTextBG = new FlxSprite().makeGraphic(1,1));
+		add(dialogueTextBG = new FlxSprite().makeGraphic(1, 1));
 		dialogueTextBG.color = 0xFF000000;
 		add(dialogueText = new FlxTypeText(0, 0, 0, '', 16));
 		dialogueText.screenCenter();
@@ -36,28 +39,35 @@ class Chapter extends FlxState
 
 		dialogueText.screenCenter(X);
 
-		dialogueTextBG.scale.set(dialogueText.width,dialogueText.height);
+		dialogueTextBG.scale.set(dialogueText.width, dialogueText.height);
 		dialogueTextBG.updateHitbox();
 
 		dialogueTextBG.x = dialogueText.x;
 		dialogueTextBG.y = dialogueText.y;
 
-		if (proceedable && FlxG.keys.justPressed.ENTER) onDialogueNext();
+		if (proceedable)
+		{
+			if (autoProceed) onDialogueNext();
+			if (!autoProceed && FlxG.keys.justPressed.ENTER) onDialogueNext();
+		}
 	}
 
-	function speak(line:NInt, speaker:String)
+	function speak(line:NInt, speaker:String, ?time:NFloat)
 	{
 		proceedable = false;
+		proceedTime = time;
+
 		dialogueText.resetText(lines[line ?? piece] ?? 'Lorem Ipsum Dolor Sit Amet');
-		dialogueText.sounds = [
-			new FlxSound().load('sfx/dialogue/spkr_$speaker.ogg'),
-		];
+		dialogueText.sounds = [new FlxSound().load('sfx/dialogue/spkr_$speaker.ogg'),];
 		dialogueText.start(dialogueText.delay, true, false, [SPACE]);
 	}
 
 	function onDialogueDone()
 	{
-		proceedable = true;
+		wait(proceedTime ?? 1, () ->
+		{
+			proceedable = true;
+		});
 	}
 
 	function onDialogueNext()

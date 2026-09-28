@@ -61,11 +61,11 @@ class Chapter1 extends Chapter
 
 	override function onDialogueDone()
 	{
-		super.onDialogueDone();
-
 		switch (piece)
 		{
-			case 1: proceedable = false;
+			case 1:
+
+			default: super.onDialogueDone();
 		}
 	}
 
@@ -83,10 +83,10 @@ class Chapter1 extends Chapter
 
 				FlxTween.tween(mapCam, {zoom: 2}, 2, {ease: FlxEase.backOut});
 
-				FlxTimer.wait(0.975, () -> lakeGele.play('jab'));
-				FlxTimer.wait(1, () -> lakeLexia.play('hit'));
-				FlxTimer.wait(1.1, () -> lakeGele.play('knee'));
-				FlxTimer.wait(1.5, onDialogueNext);
+				wait(0.975, () -> lakeGele.play('jab'));
+				wait(1, () -> lakeLexia.play('hit'));
+				wait(1.1, () -> lakeGele.play('knee'));
+				wait(1.5, onDialogueNext);
 
 				speak(null, 'gele');
 
