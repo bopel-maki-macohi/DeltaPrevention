@@ -56,7 +56,7 @@ class Chapter1 extends Chapter
 		lakeGele.screenCenter();
 		lakeGele.x -= lakeGele.width / 2;
 
-		speak(null, 'gele');
+		speak(null, 'default');
 	}
 
 	override function onDialogueDone()
@@ -93,7 +93,6 @@ class Chapter1 extends Chapter
 
 		speak(null, switch (piece)
 		{
-			case 0: 'default';
 			case 1, 3, 6: 'gele';
 			case 2, 4, 5: 'lexia';
 			case _: null;
