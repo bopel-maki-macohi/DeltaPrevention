@@ -130,6 +130,7 @@ class Chapter1 extends Chapter
 			case _: null;
 		}, switch (piece)
 		{
+			case 6: 1.2;
 			case _: null;
 		});
 
