@@ -26,14 +26,14 @@ class Chapter1 extends Chapter
 		add(lake = new RealmMapSprite('standard', 'lake'));
 		lake.alpha = 0.001;
 
-		add(lakeLexia = new Character('c1-intro/lexia', 32, 48, [
+		add(lakeLexia = new Character('chapter1/lexia-lake', 32, 48, [
 			'sleep' => {frames: [0]},
 			'hit' => {frames: [1, 2], fps: 16},
 			'sideeye' => {frames: [3]},
 		]));
 		lakeLexia.play('sleep');
 
-		add(lakeGele = new Character('c1-intro/gele', 48, 64, [
+		add(lakeGele = new Character('chapter1/gele-lake', 48, 64, [
 			'knee' => {frames: [0]},
 			'jab' => {frames: [1, 2], fps: 30},
 			'stand' => {frames: [3]},
