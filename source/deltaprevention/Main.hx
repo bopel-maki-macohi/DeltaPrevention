@@ -39,7 +39,6 @@ class Main extends FlxGame
 	{
 		playing = true;
 
-		if (Save.instance.seenIntro) FlxG.switchState(() -> new Chapter1());
-		else FlxG.switchState(() -> new IntroState());
+		FlxG.switchState(() -> new MenuState());
 	}
 }

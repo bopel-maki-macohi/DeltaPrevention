@@ -175,7 +175,7 @@ class IntroState extends FlxState
 		for (basic in members) if (basic is FlxSprite)
 		{
 			final sprite = cast(basic, FlxSprite);
-			if (sprite == null) continue;
+			if (sprite == null || sprite == deltaCrystal) continue;
 
 			FlxSpriteUtil.fadeOut(sprite, 5);
 		}
@@ -185,7 +185,7 @@ class IntroState extends FlxState
 			FlxG.sound.list.remove(track);
 			track.stop();
 
-			FlxG.switchState(() -> new Chapter1());
+			FlxG.switchState(() -> new MenuState());
 		});
 	}
 
