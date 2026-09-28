@@ -110,8 +110,6 @@ class IntroState extends FlxState
 
 	function beginTheChaos()
 	{
-		var flashColor = 0xFFFFA548;
-
 		FlxTween.tween(this, {
 			deltaTimerSpeed: 50,
 			deltaXSpeed: 0.0001,
@@ -122,20 +120,20 @@ class IntroState extends FlxState
 			{
 				for (delta in deltas) if (FlxG.random.bool(deltaTimerSpeed))
 				{
-					FlxSpriteUtil.flashTint(delta, flashColor, 0.25);
+					FlxSpriteUtil.flashTint(delta, Main.deltaColor, 0.25);
 					(delta.animation.frameIndex + 1 >= delta.animation.numFrames) ? 0 : delta.animation.frameIndex += 1;
 				}
 			},
 		});
 
-		theChaosCrystal(flashColor);
+		theChaosCrystal();
 
 		theMelting();
 	}
 
-	function theChaosCrystal(flashColor:Int)
+	function theChaosCrystal()
 	{
-		deltaCrystalBoom.color = flashColor;
+		deltaCrystalBoom.color = Main.deltaColor;
 		deltaCrystalBoom.alpha = 0.0001;
 
 		FlxTimer.wait(12, () ->
@@ -143,7 +141,7 @@ class IntroState extends FlxState
 			deltas.visible = false;
 
 			deltaCrystal.alpha = 1;
-			FlxSpriteUtil.flashTint(deltaCrystal, flashColor, 0.5);
+			FlxSpriteUtil.flashTint(deltaCrystal, Main.deltaColor, 0.5);
 		});
 
 		FlxTween.num(10, FlxG.width, 0.5, {

@@ -9,6 +9,8 @@ import flixel.FlxGame;
 
 class Main extends FlxGame
 {
+	public static var deltaColor:Int = 0xFFFFA548;
+
 	var playing = false;
 
 	public function new()
