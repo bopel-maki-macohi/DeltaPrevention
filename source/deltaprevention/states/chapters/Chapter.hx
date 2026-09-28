@@ -63,7 +63,7 @@ class Chapter extends FlxState
 		dialogueText.resetText(lines[line ?? piece] ?? 'Lorem Ipsum Dolor Sit Amet');
 
 		if (speaker == null) dialogueText.sounds = [];
-		else dialogueText.sounds = [dialogueSound.load('sfx/dialogue/spkr_$speaker.ogg'),];
+		else dialogueText.sounds = [dialogueSound.load('sfx/dialogue/spkr_${speaker ?? 'default'}.ogg'),];
 
 		dialogueText.start(dialogueText.delay, true, false, [SPACE]);
 	}

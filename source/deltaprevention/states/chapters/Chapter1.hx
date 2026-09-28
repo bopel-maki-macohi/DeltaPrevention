@@ -93,7 +93,8 @@ class Chapter1 extends Chapter
 
 		speak(null, switch (piece)
 		{
-			case 0, 1, 3, 6: 'gele';
+			case 0: 'default';
+			case 1, 3, 6: 'gele';
 			case 2, 4, 5: 'lexia';
 			case _: null;
 		});
