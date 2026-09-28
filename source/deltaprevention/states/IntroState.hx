@@ -173,12 +173,12 @@ class IntroState extends FlxState
 
 	function beginToEnd()
 	{
-		FlxSpriteUtil.flashTint(deltaCrystal, Main.deltaColor, 4.9);
-
+		FlxSpriteUtil.flashTint(deltaCrystal, Main.deltaColor, 5);
+		
 		for (basic in members) if (basic is FlxSprite)
 		{
 			final sprite = cast(basic, FlxSprite);
-			if (sprite == null || sprite == deltaCrystal) continue;
+			if (sprite == null) continue;
 
 			FlxSpriteUtil.fadeOut(sprite, 5);
 		}
