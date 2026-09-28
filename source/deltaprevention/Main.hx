@@ -1,5 +1,6 @@
 package deltaprevention;
 
+import flixel.system.scaleModes.FillScaleMode;
 import haxe.Json;
 import lime.utils.Assets;
 import flixel.FlxG;
@@ -22,6 +23,8 @@ class Main extends FlxGame
 
 		super.create(_);
 
+		FlxG.scaleMode = new DeltaScaleMode();
+
 		if (!_lostFocus) proceed();
 	}
 
@@ -29,14 +32,13 @@ class Main extends FlxGame
 	{
 		super.onFocus(_);
 
-		if (!playing)
-			proceed();
+		if (!playing) proceed();
 	}
 
 	function proceed()
 	{
 		playing = true;
-		
+
 		if (Save.instance.seenIntro) FlxG.switchState(() -> new Chapter1());
 		else FlxG.switchState(() -> new IntroState());
 	}

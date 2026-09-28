@@ -21,20 +21,16 @@ class Chapter1 extends Chapter
 	{
 		lines = Language.instance.getTextLangFile('dialogue/txt_chapter1.txt');
 
-		FlxG.cameras.reset(mapCam = new FlxCamera());
-		FlxG.cameras.add(uiCam = new FlxCamera(), false);
-		uiCam.bgColor = 0x00000000;
+		makeCams();
 
 		add(lake = new RealmMapSprite('standard', 'lake'));
 		lake.alpha = 0.001;
-		lake.screenCenter();
 
 		add(lakeLexia = new Character('c1-intro/lexia', 32, 48, [
 			'sleep' => {frames: [0]},
 			'hit' => {frames: [1, 2], fps: 16},
 			'sideeye' => {frames: [3]},
 		]));
-		lakeLexia.screenCenter();
 		lakeLexia.play('sleep');
 
 		add(lakeGele = new Character('c1-intro/gele', 48, 64, [
@@ -42,17 +38,14 @@ class Chapter1 extends Chapter
 			'jab' => {frames: [1, 2], fps: 30},
 			'stand' => {frames: [3]},
 		]));
-		lakeGele.screenCenter();
 		lakeGele.play('knee');
 		lakeGele.alpha = 0.001;
-		lakeGele.x -= lakeGele.width / 2;
 
 		super.create();
 
-		dialogueTextBG.cameras = dialogueText.cameras = [uiCam];
 		dialogueTextBG.alpha = 0.001;
 
-		dialogueText.y -= dialogueText.height * 2;
+		resize(false);
 
 		speak(null, 'gele');
 	}
@@ -78,7 +71,6 @@ class Chapter1 extends Chapter
 				lakeGele.alpha = lake.alpha = 1;
 
 				mapCam.zoom = 0.75;
-				dialogueText.y = dialogueText.height;
 
 				FlxTween.tween(mapCam, {zoom: 2}, 2, {ease: FlxEase.backOut});
 
@@ -100,5 +92,50 @@ class Chapter1 extends Chapter
 		super.onChapterDone();
 
 		// TODO: dont forget to re-reset the camera
+	}
+
+	override function onResize(Width:Int, Height:Int)
+	{
+		super.onResize(Width, Height);
+
+		resize(true);
+	}
+
+	function makeCams()
+	{
+		var mcz = 1.0;
+
+		if (mapCam != null)
+		{
+			mcz = mapCam.zoom;
+
+			// FlxTween.globalManager.forEach(t -> {
+			// 	if
+			// })
+		}
+
+		FlxG.cameras.reset(mapCam = new FlxCamera());
+		FlxG.cameras.add(uiCam = new FlxCamera(), false);
+		uiCam.bgColor = 0x00000000;
+	}
+
+	function resize(actualResize)
+	{
+		makeCams();
+
+		dialogueTextBG.cameras = dialogueText.cameras = [uiCam];
+
+		if (piece == 0) dialogueText.y -= dialogueText.height * 2;
+		else dialogueText.y = dialogueText.height;
+
+		lake.screenCenter();
+
+		if (piece < 10)
+		{
+			lakeLexia.screenCenter();
+
+			lakeGele.screenCenter();
+			lakeGele.x -= lakeGele.width / 2;
+		}
 	}
 }
