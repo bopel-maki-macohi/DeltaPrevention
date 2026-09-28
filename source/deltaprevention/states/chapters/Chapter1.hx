@@ -84,6 +84,7 @@ class Chapter1 extends Chapter
 				FlxTween.tween(mapCam, {zoom: 2}, 2, {ease: FlxEase.backOut});
 
 				wait(0.975, () -> lakeGele.play('jab'));
+				wait(1, () -> lakeLexia.shake(.5, .075));
 				wait(1, () -> lakeLexia.play('hit'));
 				wait(1, () -> FlxG.sound.play('sfx/dmg.ogg'));
 				wait(1.1, () -> lakeGele.play('knee'));
@@ -94,6 +95,7 @@ class Chapter1 extends Chapter
 			case 3:
 
 			case 4:
+				lakeGele.shake(.25, .5, 50);
 				lakeGele.play('gettingup');
 				wait(.5, () -> lakeGele.play('standlookdown'));
 			case 5:
