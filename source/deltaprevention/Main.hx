@@ -23,8 +23,6 @@ class Main extends FlxGame
 
 		super.create(_);
 
-		FlxG.scaleMode = new DeltaScaleMode();
-
 		if (!_lostFocus) proceed();
 	}
 

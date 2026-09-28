@@ -45,7 +45,16 @@ class Chapter1 extends Chapter
 
 		dialogueTextBG.alpha = 0.001;
 
-		resize(false);
+		dialogueTextBG.cameras = dialogueText.cameras = [uiCam];
+
+		dialogueText.y -= dialogueText.height * 2;
+
+		lake.screenCenter();
+
+		lakeLexia.screenCenter();
+
+		lakeGele.screenCenter();
+		lakeGele.x -= lakeGele.width / 2;
 
 		speak(null, 'gele');
 	}
@@ -94,48 +103,10 @@ class Chapter1 extends Chapter
 		// TODO: dont forget to re-reset the camera
 	}
 
-	override function onResize(Width:Int, Height:Int)
-	{
-		super.onResize(Width, Height);
-
-		resize(true);
-	}
-
 	function makeCams()
 	{
-		var mcz = 1.0;
-
-		if (mapCam != null)
-		{
-			mcz = mapCam.zoom;
-
-			// FlxTween.globalManager.forEach(t -> {
-			// 	if
-			// })
-		}
-
 		FlxG.cameras.reset(mapCam = new FlxCamera());
 		FlxG.cameras.add(uiCam = new FlxCamera(), false);
 		uiCam.bgColor = 0x00000000;
-	}
-
-	function resize(actualResize)
-	{
-		makeCams();
-
-		dialogueTextBG.cameras = dialogueText.cameras = [uiCam];
-
-		if (piece == 0) dialogueText.y -= dialogueText.height * 2;
-		else dialogueText.y = dialogueText.height;
-
-		lake.screenCenter();
-
-		if (piece < 10)
-		{
-			lakeLexia.screenCenter();
-
-			lakeGele.screenCenter();
-			lakeGele.x -= lakeGele.width / 2;
-		}
 	}
 }
