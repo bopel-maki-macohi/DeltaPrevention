@@ -29,7 +29,7 @@ class MenuState extends FlxState
 		title.y = title.height;
 
 		pressToPlay.screenCenter(X);
-		pressToPlay.y = FlxG.height - pressToPlay.height;
+		pressToPlay.y = FlxG.height - (pressToPlay.height * 2);
 	}
 
 	override function update(elapsed:Float)
