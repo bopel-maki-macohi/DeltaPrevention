@@ -93,14 +93,18 @@ class Chapter1 extends Chapter
 			case 2:
 				lakeLexia.play('sideeye');
 				speak(null, 'lexia');
+
+			default: onDialogueNext();
 		}
+
+		endingCheck();
 	}
 
 	override function onChapterDone()
 	{
 		super.onChapterDone();
 
-		// TODO: dont forget to re-reset the camera
+		FlxG.switchState(() -> new MenuState());
 	}
 
 	function makeCams()

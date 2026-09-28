@@ -16,6 +16,8 @@ class MenuState extends FlxState
 	{
 		super.create();
 
+		FlxG.cameras.reset();
+
 		if (Save.instance.seenIntro)
 		{
 			add(deltaCrystal = new FlxSprite().loadGraphic('deltacrystal.png'));

@@ -64,9 +64,10 @@ class Chapter extends FlxState
 
 	function onDialogueDone()
 	{
-		wait(proceedTime ?? 1, () ->
+		wait(proceedTime ?? 0.5, () ->
 		{
 			proceedable = true;
+			endingCheck();
 		});
 	}
 
@@ -74,8 +75,16 @@ class Chapter extends FlxState
 	{
 		proceedable = false;
 		piece++;
+	}
 
-		if (piece >= lines.length - 1) onChapterDone();
+	function endingCheck()
+	{
+		if (piece >= lines.length - 1)
+		{
+			onChapterDone();
+			return true;
+		}
+		return false;
 	}
 
 	function onChapterDone() {}
