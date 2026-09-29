@@ -73,7 +73,6 @@ class Chapter extends FlxState
 		wait(proceedTime ?? 0.5, () ->
 		{
 			proceedable = true;
-			endingCheck();
 		});
 	}
 
@@ -81,16 +80,6 @@ class Chapter extends FlxState
 	{
 		proceedable = false;
 		piece++;
-	}
-
-	function endingCheck()
-	{
-		if (piece > lines.length - 1)
-		{
-			onChapterDone();
-			return true;
-		}
-		return false;
 	}
 
 	function onChapterDone() {}

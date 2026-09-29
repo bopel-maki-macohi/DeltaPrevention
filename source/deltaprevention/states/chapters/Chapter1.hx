@@ -125,8 +125,7 @@ class Chapter1 extends Chapter
 			case 5:
 
 			case 6:
-			
-			var target = lakeLexia.x - FlxG.width / 2;
+				var target = lakeLexia.x - FlxG.width / 2;
 
 				wait(2, () ->
 				{
@@ -138,9 +137,14 @@ class Chapter1 extends Chapter
 					lakeGele.play('walk');
 					FlxTween.tween(lakeGele, {x: target}, 15, {ease: FlxEase.sineOut});
 				});
+
+				wait(5 + 15, () ->
+				{
+					onChapterDone();
+				});
 		}
 
-		if (piece < 7)
+		if (piece <= 6)
 		{
 			speak(null, switch (piece)
 			{
@@ -148,7 +152,6 @@ class Chapter1 extends Chapter
 				case 2, 4, 5: 'lexia';
 				case _: null;
 			}, null);
-			endingCheck();
 		}
 	}
 
