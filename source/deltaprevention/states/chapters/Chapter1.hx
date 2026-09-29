@@ -44,6 +44,7 @@ class Chapter1 extends Chapter
 			'jab' => {frames: [1, 2], fps: 30},
 			'gettingup' => {frames: [3]},
 			'standlookdown' => {frames: [4]},
+			'walk' => {frames: [5, 6, 7, 6], fps: 6, looped: true},
 		]));
 		lakeGele.play('knee');
 		lakeGele.alpha = 0.001;
@@ -124,10 +125,18 @@ class Chapter1 extends Chapter
 			case 5:
 
 			case 6:
+			
+			var target = lakeLexia.x - FlxG.width / 2;
+
 				wait(2, () ->
 				{
 					lakeLexia.play('walk');
-					FlxTween.tween(lakeLexia, {x: lakeLexia.x - FlxG.width / 2}, 15, {ease: FlxEase.sineOut});
+					FlxTween.tween(lakeLexia, {x: target}, 15, {ease: FlxEase.sineOut});
+				});
+				wait(4, () ->
+				{
+					lakeGele.play('walk');
+					FlxTween.tween(lakeGele, {x: target}, 15, {ease: FlxEase.sineOut});
 				});
 		}
 
