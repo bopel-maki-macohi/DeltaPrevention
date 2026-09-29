@@ -35,6 +35,7 @@ class Chapter1 extends Chapter
 			'sideeye' => {frames: [3]},
 			'moving' => {frames: [4]},
 			'up' => {frames: [5]},
+			'walk' => {frames: [6, 7, 8, 7], fps: 6, looped: true},
 		]));
 		lakeLexia.play('sleep');
 
@@ -110,31 +111,36 @@ class Chapter1 extends Chapter
 
 				wait(.25, () ->
 				{
+					remove(lakeLexia);
+					insert(members.indexOf(lakeGele) + 1, lakeLexia);
+
 					lakeLexia.play('up');
 					FlxTween.tween(lakeLexia, {x: lakeLexia.x - lakeLexia.width / 2}, 2, {ease: FlxEase.expoOut});
+
 					lakeLexia.y -= lakeLexia.height / 10;
 					FlxTween.tween(mapCamObject, {x: mapCamObject.x - FlxG.width / 16}, 2, {ease: FlxEase.sineOut});
 				});
-				wait(.5, () -> lakeGele.play('standlookdown'));
+				wait(.3, () -> lakeGele.play('standlookdown'));
 			case 5:
 
 			case 6:
-
-			case 7:
+				wait(2, () ->
+				{
+					lakeLexia.play('walk');
+					FlxTween.tween(lakeLexia, {x: lakeLexia.x - FlxG.width / 2}, 15, {ease: FlxEase.sineOut});
+				});
 		}
 
-		speak(null, switch (piece)
+		if (piece < 7)
 		{
-			case 1, 3, 6: 'gele';
-			case 2, 4, 5: 'lexia';
-			case _: null;
-		}, switch (piece)
-		{
-			case 6: 1.2;
-			case _: null;
-		});
-
-		endingCheck();
+			speak(null, switch (piece)
+			{
+				case 1, 3, 6: 'gele';
+				case 2, 4, 5: 'lexia';
+				case _: null;
+			}, null);
+			endingCheck();
+		}
 	}
 
 	override function onChapterDone()
