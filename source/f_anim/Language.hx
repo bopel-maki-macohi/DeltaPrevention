@@ -1,4 +1,4 @@
-package deltaprevention;
+package f_anim;
 
 import lime.utils.Assets;
 import flixel.util.FlxSignal;

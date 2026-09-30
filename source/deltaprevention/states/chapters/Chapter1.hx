@@ -9,7 +9,7 @@ import flixel.FlxCamera;
 
 using StringTools;
 
-class Chapter1 extends Chapter
+class Chapter1 extends Scene
 {
 	var lake:RealmMapSprite;
 	var lakeLexia:Character;

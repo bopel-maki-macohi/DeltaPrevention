@@ -1,4 +1,4 @@
-package deltaprevention;
+package f_anim;
 
 import flixel.math.FlxRandom;
 import flixel.util.FlxSave;

@@ -120,7 +120,7 @@ class IntroState extends FlxState
 			{
 				for (delta in deltas) if (FlxG.random.bool(deltaTimerSpeed))
 				{
-					FlxSpriteUtil.flashTint(delta, Main.deltaColor, 0.25);
+					FlxSpriteUtil.flashTint(delta, Global.deltaColor, 0.25);
 					(delta.animation.frameIndex + 1 >= delta.animation.numFrames) ? 0 : delta.animation.frameIndex += 1;
 				}
 			},
@@ -133,14 +133,14 @@ class IntroState extends FlxState
 
 	function theChaosCrystal()
 	{
-		deltaCrystalBoom.color = Main.deltaColor;
+		deltaCrystalBoom.color = Global.deltaColor;
 
 		FlxTimer.wait(12, () ->
 		{
 			deltas.visible = false;
 
 			deltaCrystal.alpha = 1;
-			FlxSpriteUtil.flashTint(deltaCrystal, Main.deltaColor, 0.5);
+			FlxSpriteUtil.flashTint(deltaCrystal, Global.deltaColor, 0.5);
 		});
 
 		FlxTween.num(10, FlxG.width, 0.5, {
@@ -173,7 +173,7 @@ class IntroState extends FlxState
 
 	function beginToEnd()
 	{
-		FlxSpriteUtil.flashTint(deltaCrystal, Main.deltaColor, 5);
+		FlxSpriteUtil.flashTint(deltaCrystal, Global.deltaColor, 5);
 		
 		for (basic in members) if (basic is FlxSprite)
 		{

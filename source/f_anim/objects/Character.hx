@@ -1,4 +1,4 @@
-package deltaprevention.objects;
+package f_anim.objects;
 
 import flixel.FlxG;
 import flixel.tweens.FlxTween;

@@ -1,4 +1,4 @@
-package deltaprevention;
+package f_anim;
 
 typedef NBool = Null<Bool>;
 typedef NInt = Null<Int>;

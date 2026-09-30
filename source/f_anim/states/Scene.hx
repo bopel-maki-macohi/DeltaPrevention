@@ -1,4 +1,4 @@
-package deltaprevention.states.chapters;
+package f_anim.states;
 
 import flixel.FlxSprite;
 import flixel.FlxG;
@@ -7,7 +7,7 @@ import flixel.sound.FlxSound;
 import flixel.addons.text.FlxTypeText;
 import flixel.FlxState;
 
-class Chapter extends FlxState
+class Scene extends FlxState
 {
 	var piece = 0;
 

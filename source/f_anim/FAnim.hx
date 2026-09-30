@@ -1,4 +1,4 @@
-package deltaprevention;
+package f_anim;
 
 import flixel.system.scaleModes.FillScaleMode;
 import haxe.Json;
@@ -7,10 +7,8 @@ import flixel.FlxG;
 import openfl.events.Event;
 import flixel.FlxGame;
 
-class Main extends FlxGame
+class FAnim extends FlxGame
 {
-	public static var deltaColor:Int = 0xFFFFA548;
-
 	var playing = false;
 
 	public function new()
