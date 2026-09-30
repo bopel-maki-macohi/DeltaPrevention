@@ -129,16 +129,18 @@ class Chapter1 extends Chapter
 
 				wait(2, () ->
 				{
+					dialogueText.resetText('');
+
 					lakeLexia.play('walk');
-					FlxTween.tween(lakeLexia, {x: target}, 15, {ease: FlxEase.sineOut});
+					FlxTween.tween(lakeLexia, {x: target}, 13, {ease: FlxEase.sineOut});
 				});
 				wait(4, () ->
 				{
 					lakeGele.play('walk');
-					FlxTween.tween(lakeGele, {x: target}, 15, {ease: FlxEase.sineOut});
+					FlxTween.tween(lakeGele, {x: target}, 10, {ease: FlxEase.sineOut});
 				});
 
-				wait(5 + 15, () ->
+				wait(6, () ->
 				{
 					onChapterDone();
 				});
